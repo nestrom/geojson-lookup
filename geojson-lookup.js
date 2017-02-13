@@ -1,4 +1,4 @@
-var PolygonLookup = require( 'polygon-lookup' );
+const PolygonLookup = require( 'polygon-lookup' );
 
 function buildIndex(properties, geojs)
 {
@@ -7,22 +7,26 @@ function buildIndex(properties, geojs)
         acc[val] = {};
         return acc;
     }, {});
-    
+
     properties.map((prop) => {
         geojs.features.map((feature, key) => {
             indexTable[prop][feature.properties[prop]] = indexTable[prop][feature.properties[prop]] || [];
             indexTable[prop][feature.properties[prop]].push(key);
         });
     });
-    
+
     indexTable['_geoLookup'] = new PolygonLookup( geojs );
     return indexTable;
 }
 
 var getCollection = {
-    
+
     byProperty: (property, value, geojs, indexTable) => {
-        return indexTable[property][value].map((id) => geojs.features[id] )
+        try {
+            return indexTable[property][value].map((id) => geojs.features[id])
+        }catch(e){
+            return [];
+        }
     },
     byPoint: (lat, long, indexTable) => {
         return indexTable._geoLookup.searchForMultiplePolygons(long, lat, -1);

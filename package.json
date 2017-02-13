@@ -1,6 +1,6 @@
 {
   "name": "geojson-lookup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lookup Geojson feature collections by indexing them by feature properties (INDEX TABLES) and by a Geometry (R-TREE) all in memory.",
   "main": "geojson-lookup.js",
   "dependencies": {
@@ -8,8 +8,16 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
   "author": "ywadi",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nestrom/geojson-lookup.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nestrom/geojson-lookup/issues"
+  },
+  "homepage": "https://github.com/nestrom/geojson-lookup#readme"
 }
