@@ -38,8 +38,7 @@ Utilize underscoreJS to create AND and OR between returns through intersections 
 
 ###Example Usage
 
-`
-var fs = require("fs");
+`var fs = require("fs");
 var geoIndex = require("geojson-lookup");
 
 function loadGeoJson()
@@ -55,5 +54,4 @@ var res = geoIndex.getCollection.byProperty("parentId", "123", geojs, indexTable
 
 
 console.log(res);
-console.log(geoIndex.getCollection.byPoint(28.98066, 36.25222, indexTable));
-`
+console.log(geoIndex.getCollection.byPoint(28.98066, 36.25222, indexTable));`
