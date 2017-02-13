@@ -33,6 +33,9 @@ Returns Feature Collection Array
 Returns Feature Collection Array
 
 
+###TODOs
+Utilize underscoreJS to create AND and OR between returns through intersections and Uniouns on Index tables. 
+
 ###Example Usage
 
 `
