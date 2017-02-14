@@ -5,7 +5,7 @@ const geoIndex = require("./geojson-lookup");
 
 function loadGeoJson()
 {
-    return  JSON.parse(fs.readFileSync("./testdata.geojson", 'utf8'));
+    return  JSON.parse(fs.readFileSync(__dirname+"/testdata.geojson", 'utf8'));
 }
 
 var geojs = loadGeoJson();
