@@ -4,6 +4,7 @@
   "description": "Lookup Geojson feature collections by indexing them by feature properties (INDEX TABLES) and by a Geometry (R-TREE) all in memory.",
   "main": "geojson-lookup.js",
   "dependencies": {
+    "lodash": "^4.17.4",
     "polygon-lookup": "^2.1.0"
   },
   "devDependencies": {},

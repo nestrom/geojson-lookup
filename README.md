@@ -13,47 +13,27 @@ Lookup Geojson feature collections by indexing them by feature properties (INDEX
 
 `var geoIndex = require("geojson-lookup");`
 
-3) Identify properties you want to index by under the features.properties of a geojson.
-Build your index accordingly
-
-` indexTable = geoIndex.buildIndex([ ARRAY_OF_FEATURE_PROPERTY_KEYS_TO_INDEXBY],GEOJSON_OBJECT);`
-
-Returns IndexTable
-
-4) Query by propertyId
-
-`geoIndex.getCollection.byProperty(FEATURE_PROPERTY, PROPERTY_VALUE_TO_MATCH, GEOJSON_OBJECT, INDEX_TABLE);`
-
-Returns Feature Collection Array
-
-4) Query by Lat Long Point
-
-`geoIndex.getCollection.byPoint(LATTITUDE, LONGITUDE, INDEX_TABLE)`
-
-Returns Feature Collection Array
-
-
-###TODOs
-Utilize underscoreJS to create AND and OR between returns through intersections and Uniouns on Index tables. 
-
-###Example Usage
-
-```
-var fs = require("fs");
-var geoIndex = require("geojson-lookup");
-
-function loadGeoJson()
-{
-    var contents = fs.readFileSync("./astra.geojson", 'utf8');
-    return  JSON.parse(contents);
-}
-
-var geojs = loadGeoJson();
-var indexTable = geoIndex.buildIndex(["areaType","parentId"],geojs);
-var res = geoIndex.getCollection.byProperty("parentId", "123", geojs, indexTable);
-
-
-
-console.log(res);
-console.log(geoIndex.getCollection.byPoint(28.98066, 36.25222, indexTable));
-```
+3) Initialize by passing Properties to indexBy and by passing a geoJson
+ 
+ `var geo = new geoIndex.Collection([ PROPERTIES_TO_INDEX ],GEOJSON_OBJECT);`
+ 
+ example:  
+ `var geo = new geoIndex.Collection(["areaType","parentId"],geojs);`
+ 
+ 4) Query your polygon by indexed property 
+ 
+ - Start by calling the query method on the object as `.query(INDEXED_PROPERTY, OPERATOR("==" or "!="), VALUE_TO_QUERY)`
+ - Now you can chain `.and()` , `or.()` to your query with the same parameter as `.query()` 
+ - Once done call the method `.get()` to get your results as an `[ ARRAY_OF_FEATURES ]`  
+ 
+ example:  
+ `var resByProp = (geo.query("areaType", "!=" ,'1','get').and("parentId", "=", "null").or("areaType","=","3").get());`
+ 
+ 5) You can query by Lattitude and Longitude 
+ 
+ `geo.getByPoint(LAT, LONG)`
+ 
+ example:  
+ `var resByPoint = geo.getByPoint(28.98066, 36.25222);`
+ 
+ returns `[ ARRAY_OF_FEATURES ]`
