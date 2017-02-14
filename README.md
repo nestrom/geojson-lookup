@@ -1,3 +1,4 @@
+![Badge](https://img.shields.io/npm/dt/geojson-lookup.svg)
 # geojson-lookup
 ITS ALL ABOUT SPEED and no alteration to your GEOJSONs 
 
