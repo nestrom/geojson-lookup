@@ -15,26 +15,27 @@ Lookup Geojson feature collections by indexing them by feature properties (INDEX
 `var geoIndex = require("geojson-lookup");`
 
 3) Initialize by passing Properties to indexBy and by passing a geoJson
- 
- `var geo = new geoIndex.Collection([ PROPERTIES_TO_INDEX ],GEOJSON_OBJECT);`
+
+ `var geo = geoIndex.buildIndex([ PROPERTIES_TO_INDEX ],GEOJSON_OBJECT);`
  
  example:  
- `var geo = new geoIndex.Collection(["areaType","parentId"],geojs);`
+ `var geo = geoIndex.buildIndex(["areaType","parentId"],geojs);`
  
  4) Query your polygon by indexed property 
  
- - Start by calling the query method on the object as `.query(INDEXED_PROPERTY, OPERATOR("==" or "!="), VALUE_TO_QUERY)`
+ - Start by creating an instance of the Querying mechanism `var geoQuery = new geoIndex.Queries();`
+ - Call the query method on the instantiated object as `.query(INDEXED_PROPERTY, OPERATOR("==" or "!="), VALUE_TO_QUERY)`
  - Now you can chain `.and()` , `or.()` to your query with the same parameter as `.query()` 
  - Once done call the method `.get()` to get your results as an `[ ARRAY_OF_FEATURES ]`  
  
  example:  
- `var resByProp = (geo.query("areaType", "!=" ,'1','get').and("parentId", "=", "null").or("areaType","=","3").get());`
+ `var resByProp = (geoQuery.query("areaType", "!=" ,'1','get').and("parentId", "=", "null").or("areaType","=","3").get());`
  
  5) You can query by Lattitude and Longitude 
  
- `geo.getByPoint(LAT, LONG)`
+ `geoQuery.getByPoint(LAT, LONG)`
  
  example:  
- `var resByPoint = geo.getByPoint(28.98066, 36.25222);`
+ `var resByPoint = geoQuery.getByPoint(28.98066, 36.25222);`
  
  returns `[ ARRAY_OF_FEATURES ]`

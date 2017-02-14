@@ -1,22 +1,28 @@
 const PolygonLookup = require('polygon-lookup');
 var _ = require('lodash');
 
-class Collection {
-    constructor(properties, geojs) {
-        properties = properties || [];
-        var indexTable = properties.reduce((acc, val) => {
-            acc[val] = {};
-            return acc;
-        }, {});
+var geojs, indexTable;
+function buildIndex(properties, geoJson)
+{
+    geojs = geoJson;
+    properties = properties || [];
+    indexTable = properties.reduce((acc, val) => {
+        acc[val] = {};
+        return acc;
+    }, {});
 
-        properties.map((prop) => {
-            geojs.features.map((feature, key) => {
-                indexTable[prop][feature.properties[prop]] = indexTable[prop][feature.properties[prop]] || [];
-                indexTable[prop][feature.properties[prop]].push(key);
-            });
+    properties.map((prop) => {
+        geojs.features.map((feature, key) => {
+            indexTable[prop][feature.properties[prop]] = indexTable[prop][feature.properties[prop]] || [];
+            indexTable[prop][feature.properties[prop]].push(key);
         });
+    });
 
-        indexTable['_geoLookup'] = new PolygonLookup(geojs);
+    indexTable['_geoLookup'] = new PolygonLookup(geojs);
+}
+
+class Queries {
+    constructor() {
         this._geojs = geojs;
         this._currentCollection = {};
         this._indexTable = indexTable;
@@ -60,8 +66,6 @@ class Collection {
         }
         else {
         }
-
-        //console.log(this._currentCollection);
         return this;
     }
 
@@ -97,6 +101,6 @@ class Collection {
     }
 }
 
-
-module.exports.Collection = Collection;
+module.exports.buildIndex = buildIndex;
+module.exports.Queries = Queries;
 
