@@ -29,7 +29,7 @@ Lookup Geojson feature collections by indexing them by feature properties (INDEX
  - Once done call the method `.get()` to get your results as an `[ ARRAY_OF_FEATURES ]`  
  
  example:  
- `var resByProp = (geoQuery.query("areaType", "!=" ,'1','get').and("parentId", "=", "null").or("areaType","=","3").get());`
+ `var resByProp = (geoQuery.query("areaType", "!=" ,'1').and("parentId", "=", "null").or("areaType","=","3").get());`
  
  5) You can query by Lattitude and Longitude 
  
