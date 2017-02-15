@@ -1,4 +1,7 @@
 ![Build](https://api.travis-ci.org/nestrom/geojson-lookup.svg?branch=master)
+
+![Build](https://nodei.co/npm/geojson-lookup.png)
+
 # geojson-lookup
 ITS ALL ABOUT SPEED and no alteration to your GEOJSONs 
 
